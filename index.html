@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#6657e8">
+<meta name="description" content="Create a temporary email inbox and read incoming messages.">
+<title>Temp Mail — Temporary Email Inbox</title>
+<style>
+:root{color-scheme:light;--bg:#f5f6fc;--surface:#fff;--text:#172033;--muted:#69738a;--line:#e6e9f2;--primary:#6557e8;--primary2:#8175ff;--soft:#eeecff;--danger:#c0394b;--shadow:0 16px 45px #25305a12}
+[data-theme="dark"]{color-scheme:dark;--bg:#101321;--surface:#191d2e;--text:#f1f3ff;--muted:#a3abc2;--line:#30364b;--primary:#958aff;--primary2:#7669f2;--soft:#2b2850;--danger:#ff7d8b;--shadow:0 16px 45px #0003}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;transition:background .2s,color .2s}
+button{font:inherit;cursor:pointer;border:0}button:disabled{opacity:.55;cursor:not-allowed}.wrap{max-width:1050px;margin:auto;padding:0 18px}
+header{height:72px;border-bottom:1px solid var(--line);background:var(--surface)}.nav{height:100%;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.4px}.logo{display:grid;place-items:center;width:38px;height:38px;border-radius:13px;color:#fff;background:linear-gradient(135deg,var(--primary),#a16cf5);box-shadow:0 7px 18px #6557e83b}.navright{display:flex;gap:8px;align-items:center}.iconbtn,.secondary{background:var(--surface);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:10px 13px}.iconbtn{width:42px;height:42px;padding:0;font-size:18px}.hero{text-align:center;padding:42px 0 24px}.eyebrow{display:inline-flex;align-items:center;gap:7px;background:var(--soft);color:var(--primary);font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:7px 12px;border-radius:99px}.dot{width:7px;height:7px;border-radius:50%;background:#36b77b}.hero h1{font-size:clamp(29px,5vw,43px);line-height:1.12;letter-spacing:-1.6px;margin:17px 0 10px}.hero p{margin:0;color:var(--muted);font-size:16px}.layout{display:grid;grid-template-columns:1fr 1.08fr;gap:18px;align-items:start;padding-bottom:28px}.card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);min-width:0}.cardhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.card h2{font-size:17px;margin:0;letter-spacing:-.3px}.muted{color:var(--muted)}.addressbox{display:flex;gap:10px;align-items:center;background:var(--bg);border:1px dashed #b7b1fa;border-radius:15px;padding:14px;margin:15px 0}.address{font-weight:750;overflow-wrap:anywhere;flex:1;font-size:15px}.copy{background:var(--soft);color:var(--primary);border-radius:10px;padding:10px 12px;font-weight:750;white-space:nowrap}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.primary{background:linear-gradient(135deg,var(--primary),var(--primary2));color:white;border-radius:12px;padding:12px 14px;font-weight:750;box-shadow:0 8px 16px #6557e82b}.secondary{font-weight:650}.wide{width:100%;margin-top:10px}.statusrow{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:18px;font-size:12px;color:var(--muted)}.pill{border-radius:99px;background:var(--bg);padding:5px 9px;font-size:12px;white-space:nowrap}.inboxhead{display:flex;align-items:center;justify-content:space-between;gap:10px}.count{min-width:26px;height:26px;border-radius:9px;background:var(--soft);color:var(--primary);display:grid;place-items:center;font-weight:800;font-size:12px;padding:0 7px}.inbox-tools{display:flex;align-items:center;gap:8px}.mail-list{margin-top:14px;display:grid;gap:9px}.mailitem{width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px;display:flex;gap:12px;align-items:flex-start;color:var(--text);transition:border .15s,transform .15s}.mailitem:hover{border-color:var(--primary);transform:translateY(-1px)}.avatar{width:38px;height:38px;flex:0 0 38px;border-radius:12px;display:grid;place-items:center;background:var(--soft);color:var(--primary);font-weight:800}.mailmeta{min-width:0;flex:1}.senderline{display:flex;justify-content:space-between;gap:8px}.sender{font-weight:750;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.time{font-size:11px;color:var(--muted);white-space:nowrap}.subject{font-weight:650;font-size:13px;margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.preview{color:var(--muted);font-size:12px;margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.empty{padding:35px 12px;text-align:center;color:var(--muted)}.emptyicon{font-size:36px;margin-bottom:8px}.empty strong{display:block;color:var(--text);margin-bottom:4px}.spinner{display:inline-block;width:15px;height:15px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin .7s linear infinite;vertical-align:-3px;margin-right:6px}@keyframes spin{to{transform:rotate(360deg)}}.notice{display:none;margin:0 0 16px;padding:12px 14px;border-radius:12px;font-size:13px}.notice.show{display:block}.notice.error{background:#ffe9ec;color:#922336}.notice.info{background:var(--soft);color:var(--primary)}[data-theme="dark"] .notice.error{background:#49232e;color:#ffb6c0}.warning{margin:0 0 28px;border:1px solid #f0d99a;background:#fff8df;color:#69521a;border-radius:15px;padding:14px 16px;font-size:13px}[data-theme="dark"] .warning{background:#39311d;color:#f5dfa0;border-color:#66552b}.warning strong{display:block;margin-bottom:3px}.footer{text-align:center;padding:10px 0 32px;color:var(--muted);font-size:12px}.footer a{color:var(--primary)}.reader{position:fixed;inset:0;background:#080b18a8;z-index:5;display:none;align-items:flex-end;justify-content:center;padding:14px}.reader.open{display:flex}.readerpanel{width:min(760px,100%);max-height:92vh;overflow:auto;background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 25px 80px #0004;animation:rise .2s ease}@keyframes rise{from{transform:translateY(15px);opacity:.7}to{transform:translateY(0);opacity:1}}.readerbar{display:flex;justify-content:space-between;align-items:center;gap:12px}.readerbar h2{margin:0;font-size:20px}.readerinfo{border-bottom:1px solid var(--line);padding:18px 0;margin-bottom:16px;font-size:13px;color:var(--muted);overflow-wrap:anywhere}.readerinfo strong{color:var(--text)}.readerbody{overflow-wrap:anywhere;white-space:normal;line-height:1.7}.readerbody pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit}.readerbody img{max-width:100%;height:auto}.readerbody a{color:var(--primary);pointer-events:none}.readerbody table{max-width:100%;border-collapse:collapse}.readerbody td,.readerbody th{border:1px solid var(--line);padding:5px}.close{font-size:22px;width:40px;height:40px;border-radius:12px;background:var(--bg);color:var(--text)}.tiny{font-size:11px;color:var(--muted)}.hidden{display:none!important}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.hero{padding:32px 0 22px}.card{padding:18px}.wrap{padding:0 13px}.layout{gap:13px}.addressbox{align-items:flex-start}.address{padding-top:7px}.actions{grid-template-columns:1fr 1fr}.reader{padding:0}.readerpanel{max-height:94vh;border-radius:22px 22px 0 0}.navright .navlabel{display:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <div class="brand"><span class="logo" aria-hidden="true">✉</span><span>Temp Mail</span></div>
+  <div class="navright"><button class="secondary navlabel" id="newTop">＋ New address</button><button class="iconbtn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle theme">☾</button></div>
+</div></header>
+<main class="wrap">
+  <section class="hero"><span class="eyebrow"><span class="dot"></span> Temporary inbox</span><h1>Your Temporary Email Address</h1><p>Receive messages without sharing your personal email.</p></section>
+  <div id="notice" class="notice" role="status" aria-live="polite"></div>
+  <section class="layout">
+    <article class="card">
+      <div class="cardhead"><h2>Your email address</h2><span class="pill" id="connection">Not connected</span></div>
+      <p class="muted" style="font-size:13px;margin:0">Use this address to receive incoming messages.</p>
+      <div class="addressbox"><div class="address" id="emailAddress">Create an address to begin</div><button class="copy" id="copyBtn" disabled>Copy</button></div>
+      <div class="actions"><button class="primary" id="generateBtn">✦ Generate email</button><button class="secondary" id="refreshBtn" disabled>↻ Refresh inbox</button></div>
+      <button class="secondary wide" id="deleteBtn" disabled>Delete this mailbox</button>
+      <div class="statusrow"><span id="mailboxStatus">No active mailbox</span><span id="expiry">Expiry: provider-dependent</span></div>
+      <p class="tiny" style="margin:14px 0 0">Your mailbox access is held in this browser tab session. Avoid using this address for private or important accounts.</p>
+    </article>
+    <article class="card">
+      <div class="inboxhead"><div style="display:flex;align-items:center;gap:9px"><h2>Inbox</h2><span class="count" id="messageCount">0</span></div><div class="inbox-tools"><span class="tiny" id="lastUpdated"></span><button class="iconbtn" id="refreshIcon" aria-label="Refresh inbox" title="Refresh inbox" disabled>↻</button></div></div>
+      <div class="mail-list" id="mailList"><div class="empty"><div class="emptyicon">📭</div><strong>Your inbox is empty</strong>Generate an address to start receiving real email.</div></div>
+    </article>
+  </section>
+  <aside class="warning"><strong>Privacy & safety reminder</strong>Temporary inboxes may be accessible to the provider and are not suitable for banking, sensitive information, private conversations, or important password recovery. Provider availability, retention, and rate limits can change.</aside>
+</main>
+<footer class="footer">Powered by the <a href="https://mail.tm/" target="_blank" rel="noopener noreferrer">Mail.tm</a> temporary email API · <a href="https://docs.mail.tm/" target="_blank" rel="noopener noreferrer">API documentation</a></footer>
+
+<div class="reader" id="reader" role="dialog" aria-modal="true" aria-labelledby="readerSubject">
+  <section class="readerpanel">
+    <div class="readerbar"><h2 id="readerSubject">Message</h2><button class="close" id="closeReader" aria-label="Close message">×</button></div>
+    <div class="readerinfo" id="readerInfo"></div>
+    <div class="readerbody" id="readerBody"></div>
+  </section>
+</div>
+<script>
+(() => {
+  "use strict";
+  const API = "https://api.mail.tm";
+  const $ = id => document.getElementById(id);
+  const els = {
+    notice:$("notice"), email:$("emailAddress"), copy:$("copyBtn"), generate:$("generateBtn"),
+    refresh:$("refreshBtn"), refreshIcon:$("refreshIcon"), del:$("deleteBtn"), connection:$("connection"),
+    status:$("mailboxStatus"), expiry:$("expiry"), count:$("messageCount"), list:$("mailList"),
+    updated:$("lastUpdated"), theme:$("themeBtn"), reader:$("reader"), readerSubject:$("readerSubject"),
+    readerInfo:$("readerInfo"), readerBody:$("readerBody")
+  };
+  let mailbox = null, messages = [], polling = null, busy = false;
+  const SESSION_KEY = "temp-mail-session-v1";
+  function notify(message, type="info") {
+    els.notice.textContent = message;
+    els.notice.className = "notice show " + type;
+    if (type !== "error") setTimeout(() => { if (els.notice.textContent === message) els.notice.className = "notice"; }, 5500);
+  }
+  function setBusy(value, label) {
+    busy = value; els.generate.disabled = value;
+    els.generate.innerHTML = value ? '<span class="spinner"></span>' + (label || "Working…") : "✦ Generate email";
+  }
+  async function request(path, options={}) {
+    const headers = new Headers(options.headers || {});
+    headers.set("Accept", "application/json");
+    if (options.body) headers.set("Content-Type", "application/json");
+    if (options.auth !== false && mailbox?.token) headers.set("Authorization", "Bearer " + mailbox.token);
+    let response;
+    try { response = await fetch(API + path, {...options, headers, cache:"no-store"}); }
+    catch (e) {
+      if (e instanceof TypeError) throw new Error("Could not connect to the email provider. Check your connection or whether the provider allows browser requests (CORS).");
+      throw e;
+    }
+    if (response.status === 204) return null;
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      const detail = data.detail || data.message || data["hydra:description"] || "";
+      if (response.status === 429) throw new Error("The provider rate limit was reached. Please wait a little before trying again.");
+      if (response.status === 401) throw new Error("Mailbox session expired or access was rejected. Generate a new address.");
+      if (response.status === 422) throw new Error(detail || "The provider rejected this address or domain. Please try again later.");
+      throw new Error((detail ? detail + " " : "") + "Provider request failed (HTTP " + response.status + ").");
+    }
+    return data;
+  }
+  function saveSession() {
+    try { if (mailbox) sessionStorage.setItem(SESSION_KEY, JSON.stringify(mailbox)); else sessionStorage.removeItem(SESSION_KEY); }
+    catch (_) { notify("Browser session storage is unavailable. Keep this tab open to retain mailbox access.", "info"); }
+  }
+  function restoreSession() {
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(SESSION_KEY) || "null");
+      if (saved && saved.address && saved.token && saved.password && saved.id) mailbox = saved;
+    } catch (_) {}
+  }
+  function updateUI() {
+    const active = !!mailbox;
+    els.email.textContent = active ? mailbox.address : "Create an address to begin";
+    [els.copy,els.refresh,els.refreshIcon,els.del].forEach(b => b.disabled = !active || busy);
+    els.connection.textContent = active ? "Connected" : "Not connected";
+    els.status.textContent = active ? "Mailbox active in this tab" : "No active mailbox";
+    els.expiry.textContent = "Expiry: provider-dependent";
+    els.count.textContent = String(messages.length);
+  }
+  function randString(length=13) {
+    const alphabet = "abcdefghijklmnopqrstuvwxyz0123456789";
+    const bytes = new Uint8Array(length); crypto.getRandomValues(bytes);
+    return Array.from(bytes, b => alphabet[b % alphabet.length]).join("");
+  }
+  async function generateMailbox() {
+    if (busy) return;
+    if (mailbox && !confirm("Generate a new address? The current mailbox will be deleted if the provider permits it, and its inbox may be lost.")) return;
+    setBusy(true, "Creating mailbox…"); stopPolling();
+    const old = mailbox;
+    mailbox = null; messages = []; updateUI(); renderMessages();
+    if (old) {
+      try { await request("/accounts/" + encodeURIComponent(old.id), {method:"DELETE", headers:{Authorization:"Bearer " + old.token}}); }
+      catch (_) { /* Continue creating a new address even if provider-side deletion fails. */ }
+    }
+    try {
+      const domainsResponse = await request("/domains");
+      const domains = domainsResponse["hydra:member"] || [];
+      const domain = domains.find(d => d.isActive && !d.isPrivate && d.domain);
+      if (!domain) throw new Error("The provider did not return an available public domain. Please try again later.");
+      let created = null, lastError = null;
+      // Account creation uses only a domain returned by the live provider.
+      for (let attempt=0; attempt<3; attempt++) {
+        const address = randString(13) + "@" + domain.domain;
+        const password = randString(28) + "A9!";
+        try {
+          created = await request("/accounts", {method:"POST", auth:false, body:JSON.stringify({address,password})});
+          mailbox = {id:created.id, address:created.address || address, password};
+          break;
+        } catch (e) {
+          lastError = e;
+          if (!String(e.message).includes("already") && !String(e.message).includes("422")) throw e;
+        }
+      }
+      if (!mailbox) throw lastError || new Error("Could not create a mailbox.");
+      const auth = await request("/token", {method:"POST", auth:false, body:JSON.stringify({address:mailbox.address,password:mailbox.password})});
+      if (!auth.token) throw new Error("The provider did not return an access token.");
+      mailbox.token = auth.token;
+      saveSession(); updateUI();
+      notify("Real mailbox created. Send a test email to the address above.", "info");
+      await refreshInbox(true); startPolling();
+    } catch (e) {
+      mailbox = null; messages = []; saveSession(); updateUI(); renderMessages();
+      notify(e.message || "Could not create a mailbox. Please try again.", "error");
+    } finally { setBusy(false); updateUI(); }
+  }
+  async function refreshInbox(silent=false) {
+    if (!mailbox || busy) return;
+    try {
+      const data = await request("/messages");
+      const incoming = data["hydra:member"] || [];
+      messages = incoming;
+      renderMessages();
+      els.updated.textContent = "Updated " + new Date().toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"});
+      if (!silent) notify(messages.length ? "Inbox refreshed." : "Inbox refreshed — no messages yet.", "info");
+    } catch (e) {
+      if (!silent) notify(e.message, "error");
+      else if (String(e.message).includes("session expired") || String(e.message).includes("401")) notify(e.message, "error");
+    }
+    updateUI();
+  }
+  function startPolling() { stopPolling(); polling = setInterval(() => { if (mailbox && !document.hidden && !busy) refreshInbox(true); }, 15000); }
+  function stopPolling() { if (polling) clearInterval(polling); polling = null; }
+  function fmtDate(value) {
+    if (!value) return "";
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? "" : date.toLocaleString([], {month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"});
+  }
+  function renderMessages() {
+    els.count.textContent = String(messages.length);
+    els.list.replaceChildren();
+    if (!messages.length) {
+      const empty = document.createElement("div"); empty.className = "empty";
+      const icon = document.createElement("div"); icon.className = "emptyicon"; icon.textContent = mailbox ? "📨" : "📭";
+      const strong = document.createElement("strong"); strong.textContent = mailbox ? "Waiting for messages" : "Your inbox is empty";
+      const p = document.createElement("div"); p.textContent = mailbox ? "New messages will appear here automatically." : "Generate an address to start receiving real email.";
+      empty.append(icon,strong,p); els.list.append(empty); return;
+    }
+    for (const msg of messages) {
+      const button = document.createElement("button"); button.className = "mailitem"; button.type = "button";
+      const avatar = document.createElement("span"); avatar.className = "avatar";
+      avatar.textContent = (msg.from?.name || msg.from?.address || "?").trim().charAt(0).toUpperCase();
+      const meta = document.createElement("span"); meta.className = "mailmeta";
+      const senderline = document.createElement("span"); senderline.className = "senderline";
+      const sender = document.createElement("span"); sender.className = "sender"; sender.textContent = msg.from?.name || msg.from?.address || "Unknown sender";
+      const time = document.createElement("span"); time.className = "time"; time.textContent = fmtDate(msg.createdAt);
+      const subject = document.createElement("div"); subject.className = "subject"; subject.textContent = msg.subject || "(No subject)";
+      const preview = document.createElement("div"); preview.className = "preview"; preview.textContent = msg.intro || "Open message to read";
+      senderline.append(sender,time); meta.append(senderline,subject,preview); button.append(avatar,meta);
+      button.addEventListener("click", () => openMessage(msg.id)); els.list.append(button);
+    }
+  }
+  // Allow only a small formatting allowlist. Strip event handlers, scripts, forms,
+  // remote media, stylesheets, iframes, and all non-HTTP links before display.
+  function sanitizedEmailHTML(html) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(String(html || ""), "text/html");
+    const allowed = new Set(["A","B","STRONG","I","EM","U","P","BR","DIV","SPAN","UL","OL","LI","BLOCKQUOTE","PRE","CODE","HR","H1","H2","H3","H4","TABLE","THEAD","TBODY","TR","TD","TH"]);
+    const walk = node => {
+      for (const child of Array.from(node.childNodes)) {
+        if (child.nodeType === Node.ELEMENT_NODE) {
+          if (!allowed.has(child.tagName)) {
+            if (["SCRIPT","STYLE","IFRAME","OBJECT","EMBED","FORM","INPUT","BUTTON","VIDEO","AUDIO","IMG","SVG","MATH"].includes(child.tagName)) { child.remove(); continue; }
+            child.replaceWith(...Array.from(child.childNodes)); continue;
+          }
+          for (const attr of Array.from(child.attributes)) child.removeAttribute(attr.name);
+          if (child.tagName === "A") child.removeAttribute("href");
+          walk(child);
+        } else if (child.nodeType !== Node.TEXT_NODE) child.remove();
+      }
+    };
+    walk(doc.body);
+    return doc.body;
+  }
+  async function openMessage(id) {
+    if (!mailbox) return;
+    try {
+      const msg = await request("/messages/" + encodeURIComponent(id));
+      els.readerSubject.textContent = msg.subject || "(No subject)";
+      els.readerInfo.replaceChildren();
+      const rows = [
+        ["From", msg.from?.name ? `${msg.from.name} <${msg.from.address || ""}>` : (msg.from?.address || "Unknown")],
+        ["To", (msg.to || []).map(x => x.address || x.name || "").join(", ")],
+        ["Received", fmtDate(msg.createdAt)]
+      ];
+      for (const [label,value] of rows) {
+        const line = document.createElement("div"); line.style.marginBottom = "5px";
+        const strong = document.createElement("strong"); strong.textContent = label + ": ";
+        line.append(strong,document.createTextNode(value)); els.readerInfo.append(line);
+      }
+      els.readerBody.replaceChildren();
+      if (Array.isArray(msg.html) && msg.html.length) els.readerBody.append(sanitizedEmailHTML(msg.html[0]));
+      else { const pre = document.createElement("pre"); pre.textContent = msg.text || "This message has no readable text body."; els.readerBody.append(pre); }
+      els.reader.classList.add("open"); document.body.style.overflow = "hidden";
+      if (!msg.seen) {
+        try { await request("/messages/" + encodeURIComponent(id), {method:"PATCH",body:"{}"}); const item=messages.find(m=>m.id===id); if(item)item.seen=true; }
+        catch (_) {}
+      }
+    } catch (e) { notify("Could not open this message: " + e.message, "error"); }
+  }
+  async function deleteMailbox() {
+    if (!mailbox || busy) return;
+    if (!confirm("Permanently delete this mailbox and its messages from the provider?")) return;
+    setBusy(true,"Deleting…");
+    try {
+      await request("/accounts/" + encodeURIComponent(mailbox.id), {method:"DELETE"});
+      mailbox = null; messages = []; saveSession(); stopPolling(); renderMessages(); updateUI();
+      notify("Mailbox deletion was accepted by the provider.", "info");
+    } catch (e) { notify("Mailbox deletion failed: " + e.message, "error"); }
+    finally { setBusy(false); updateUI(); }
+  }
+  async function copyAddress() {
+    if (!mailbox) return;
+    try { await navigator.clipboard.writeText(mailbox.address); notify("Email address copied.", "info"); }
+    catch (_) {
+      const input = document.createElement("textarea"); input.value = mailbox.address; input.style.position="fixed"; input.style.opacity="0"; document.body.append(input); input.select();
+      const ok = document.execCommand("copy"); input.remove();
+      notify(ok ? "Email address copied." : "Copy failed. Please select and copy the address manually.", ok ? "info" : "error");
+    }
+  }
+  function toggleTheme() {
+    const dark = document.documentElement.dataset.theme !== "dark";
+    document.documentElement.dataset.theme = dark ? "dark" : "light";
+    els.theme.textContent = dark ? "☀" : "☾";
+    try { localStorage.setItem("temp-mail-theme", dark ? "dark" : "light"); } catch (_) {}
+  }
+  $("generateBtn").addEventListener("click",generateMailbox);
+  $("newTop").addEventListener("click",generateMailbox);
+  $("refreshBtn").addEventListener("click",()=>refreshInbox(false));
+  $("refreshIcon").addEventListener("click",()=>refreshInbox(false));
+  $("copyBtn").addEventListener("click",copyAddress);
+  $("deleteBtn").addEventListener("click",deleteMailbox);
+  $("themeBtn").addEventListener("click",toggleTheme);
+  $("closeReader").addEventListener("click",()=>{els.reader.classList.remove("open");document.body.style.overflow="";});
+  els.reader.addEventListener("click",e=>{if(e.target===els.reader){els.reader.classList.remove("open");document.body.style.overflow="";}});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"){els.reader.classList.remove("open");document.body.style.overflow="";}});
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden && mailbox) refreshInbox(true);});
+  try { if(localStorage.getItem("temp-mail-theme")==="dark"){document.documentElement.dataset.theme="dark";els.theme.textContent="☀";} } catch (_) {}
+  restoreSession(); updateUI();
+  if (mailbox) { refreshInbox(true); startPolling(); }
+})();
+</script>
+</body>
+</html>
